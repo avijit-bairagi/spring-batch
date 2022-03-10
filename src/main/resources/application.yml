@@ -1,0 +1,29 @@
+server.port: 8099
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=MY_DB
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: Dev1234!
+    hikari.maximumPoolSize: 20
+  jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.SQLServer2012Dialect
+  show-sql: true
+  properties:
+    hibernate:
+      format_sql: true
+
+  batch:
+    job:
+      enabled: false
+
+batch.chunk:
+  step1.size: 4
+  step2.size: 3
+
+spring.jpa.hibernate.ddl-auto: update
+
+file.employee: src/main/resources/employees.csv
+
+logging.level.org.hibernate.SQL: DEBUG

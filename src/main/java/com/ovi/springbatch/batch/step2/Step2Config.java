@@ -1,12 +1,14 @@
 package com.ovi.springbatch.batch.step2;
 
+import com.ovi.springbatch.batch.step2.listener.Step2ChunkListener;
 import com.ovi.springbatch.entity.Customer;
-import com.ovi.springbatch.lintener.Step2ChunkListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 
 @Configuration
 public class Step2Config {
@@ -46,6 +48,13 @@ public class Step2Config {
                 .processor(step2Processor)
                 .writer(step2Writer)
                 .listener(step2ChunkListener)
+//                .taskExecutor(taskExecutor())
+//                .throttleLimit(20)
                 .build();
+    }
+
+    @Bean
+    public TaskExecutor taskExecutor() {
+        return new SimpleAsyncTaskExecutor("step2-task-executor");
     }
 }

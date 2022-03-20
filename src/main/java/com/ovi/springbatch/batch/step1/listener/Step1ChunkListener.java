@@ -1,4 +1,4 @@
-package com.ovi.springbatch.lintener;
+package com.ovi.springbatch.batch.step1.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Step2ChunkListener implements ChunkListener {
+public class Step1ChunkListener implements ChunkListener {
 
     private final int chunkSize;
 
@@ -16,7 +16,7 @@ public class Step2ChunkListener implements ChunkListener {
 
     private long startTimeInMs;
 
-    public Step2ChunkListener(@Value("${batch.chunk.step2.size}") int chunkSize) {
+    public Step1ChunkListener(@Value("${batch.chunk.step1.size}") int chunkSize) {
         this.chunkSize = chunkSize;
     }
 
@@ -35,7 +35,6 @@ public class Step2ChunkListener implements ChunkListener {
 
     @Override
     public void afterChunkError(ChunkContext context) {
-
 
     }
 }

@@ -38,7 +38,6 @@ public class SpringJobConfig {
                 .incrementer(new RunIdIncrementer())
                 .listener(jobExecutionListener)
                 .start(step1)
-                .next(step2)
                 .build();
     }
 
@@ -46,7 +45,18 @@ public class SpringJobConfig {
     public Job job2() {
 
         return jobBuilderFactory
-                .get("file-processing-2")
+                .get("customer-processing")
+                .incrementer(new RunIdIncrementer())
+                .listener(jobExecutionListener)
+                .start(step2)
+                .build();
+    }
+
+    @Bean
+    public Job job3() {
+
+        return jobBuilderFactory
+                .get("combined-processing")
                 .incrementer(new RunIdIncrementer())
                 .listener(jobExecutionListener)
                 .start(step1)

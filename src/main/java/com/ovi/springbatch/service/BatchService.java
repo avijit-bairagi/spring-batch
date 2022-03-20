@@ -24,10 +24,13 @@ public class BatchService {
 
     private final Job job2;
 
-    public BatchService(JobLauncher jobLauncher, Job job1, Job job2) {
+    private final Job job3;
+
+    public BatchService(JobLauncher jobLauncher, Job job1, Job job2, Job job3) {
         this.jobLauncher = jobLauncher;
         this.job1 = job1;
         this.job2 = job2;
+        this.job3 = job3;
     }
 
     @Async
@@ -41,12 +44,24 @@ public class BatchService {
         logger.info("JobExecution: {}", jobExecution.getStatus());
     }
 
+    @Async
     public void loadJob2() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
 
         Map<String, JobParameter> maps = new HashMap<>();
         maps.put("time", new JobParameter(System.currentTimeMillis()));
         JobParameters parameters = new JobParameters(maps);
         JobExecution jobExecution = jobLauncher.run(job2, parameters);
+
+        logger.info("JobExecution: {}", jobExecution.getStatus());
+    }
+
+    @Async
+    public void loadJob3() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
+
+        Map<String, JobParameter> maps = new HashMap<>();
+        maps.put("time", new JobParameter(System.currentTimeMillis()));
+        JobParameters parameters = new JobParameters(maps);
+        JobExecution jobExecution = jobLauncher.run(job3, parameters);
 
         logger.info("JobExecution: {}", jobExecution.getStatus());
     }

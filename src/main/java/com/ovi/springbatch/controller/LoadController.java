@@ -40,4 +40,13 @@ public class LoadController {
         logger.info("JobExecution: {}", "invoked");
         return "Ok-job2";
     }
+
+    @GetMapping("/job3")
+    public String loadJob3() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+            JobRestartException, JobInstanceAlreadyCompleteException {
+
+        batchService.loadJob3();
+        logger.info("JobExecution: {}", "invoked");
+        return "Ok-job3";
+    }
 }
